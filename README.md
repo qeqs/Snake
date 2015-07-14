@@ -1,4 +1,4 @@
 # Snake
 C#
--\nhello world
+-hello world
 -kek
