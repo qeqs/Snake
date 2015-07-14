@@ -1,0 +1,13 @@
+C:\Users\kvakin\Documents\Visual Studio 2013\Projects\Snake\Snake\bin\Release\Snake.exe.config
+C:\Users\kvakin\Documents\Visual Studio 2013\Projects\Snake\Snake\bin\Release\Snake.exe.manifest
+C:\Users\kvakin\Documents\Visual Studio 2013\Projects\Snake\Snake\bin\Release\Snake.application
+C:\Users\kvakin\Documents\Visual Studio 2013\Projects\Snake\Snake\bin\Release\Snake.exe
+C:\Users\kvakin\Documents\Visual Studio 2013\Projects\Snake\Snake\bin\Release\Snake.pdb
+C:\Users\kvakin\Documents\Visual Studio 2013\Projects\Snake\Snake\obj\Release\Snake.csprojResolveAssemblyReference.cache
+C:\Users\kvakin\Documents\Visual Studio 2013\Projects\Snake\Snake\obj\Release\Snake.Form1.resources
+C:\Users\kvakin\Documents\Visual Studio 2013\Projects\Snake\Snake\obj\Release\Snake.Properties.Resources.resources
+C:\Users\kvakin\Documents\Visual Studio 2013\Projects\Snake\Snake\obj\Release\Snake.csproj.GenerateResource.Cache
+C:\Users\kvakin\Documents\Visual Studio 2013\Projects\Snake\Snake\obj\Release\Snake.exe.manifest
+C:\Users\kvakin\Documents\Visual Studio 2013\Projects\Snake\Snake\obj\Release\Snake.application
+C:\Users\kvakin\Documents\Visual Studio 2013\Projects\Snake\Snake\obj\Release\Snake.exe
+C:\Users\kvakin\Documents\Visual Studio 2013\Projects\Snake\Snake\obj\Release\Snake.pdb
