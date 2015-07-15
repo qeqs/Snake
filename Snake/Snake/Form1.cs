@@ -15,8 +15,9 @@ namespace Snake
         public Form1()
         {
             InitializeComponent();
+            c = new Constants();
         }
-        int w;
+        int w;//keys
         Graphics g;
         Constants c;
         Draw d;
@@ -33,13 +34,33 @@ namespace Snake
             g.Clear(Color.AntiqueWhite);
             g.DrawString(c.score.ToString(), ff, Brushes.Black, x / 2-c.step, y / 2-c.step);
             c.score = 0;
+            button1.Enabled = true;
+            button1.Visible = true;
+            
+        }
+        bool pause = false;
+        void Pause()
+        {
+            if (!pause)
+            {
+                timer1.Enabled = false;
+                pause = true;
+                g.DrawString("Pause", ff, Brushes.Black, x / 2 - c.step, y / 2 - c.step);
+            }
+            else
+            {
+                pause = false;
+                timer1.Enabled = true;
+            }
+
         }
         private void newGameToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            button1.Enabled = false;
+            button1.Visible = false;
             ff = new Font("Arial", 40, FontStyle.Bold);//end game string
             w = 1;//turn var
             int k = 0;//kostil
-            c = new Constants();
             xx = new int[x / 25];//coord net
             yy = new int[y / 25];
             d = new Draw(x, y);
@@ -58,7 +79,13 @@ namespace Snake
                 yy[i] = k;
             }
             f.Add(new Food(xx[rand.Next(0, x / 25 - 1)], yy[rand.Next(0, y / 25 - 1)], c.step, c.step));
-            timer1.Enabled = true;
+            for (int i = 3; i > 0; i--)
+            {
+                g.Clear(Color.AntiqueWhite);
+                g.DrawString(i.ToString(), ff, Brushes.Black, x / 2 - c.step, y / 2 - c.step);
+                System.Threading.Thread.Sleep(1000);
+            }
+                timer1.Enabled = true;
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -68,7 +95,7 @@ namespace Snake
             g = CreateGraphics();
         }
         int s = 1;//counter for turn method
-        void Chain(int x,int y)
+        void Chain(int x,int y)//snake move
         {
           
             if (s != b.Count)
@@ -170,6 +197,9 @@ namespace Snake
                     if (w != 3)
                         w = 4;
                     break;
+                case 19:
+                    Pause();
+                break;
             }
         }
 
@@ -177,7 +207,7 @@ namespace Snake
         {
             Close();
         }
-
+        //-----------------Difficulty menu---------------
         private void mediumToolStripMenuItem_Click(object sender, EventArgs e)
         {
             timer1.Interval = 100;
@@ -197,6 +227,62 @@ namespace Snake
             c.score_step = 1;
             timer1.Interval = 200;
             label2.Text = "Low";
+        }
+        //-------------------------------------------------
+        private void Form1_ClientSizeChanged(object sender, EventArgs e)
+        {
+            Pause();
+            x = ClientSize.Width;
+            y = ClientSize.Height;
+            int k = 0;//kostil
+            xx = new int[x / 25];//coord net
+            yy = new int[y / 25];
+            d = new Draw(x, y);
+            for (int i = 0; i < x / 25; i++)
+            {
+                k += c.step;
+                xx[i] = k;
+            }
+            k = 0;
+            for (int i = 0; i < y / 25; i++)
+            {
+                k += c.step;
+                yy[i] = k;
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)//new game button
+        {
+            button1.Enabled = false;
+            button1.Visible = false;
+            ff = new Font("Arial", 40, FontStyle.Bold);//end game string
+            w = 1;//turn var
+            int k = 0;//kostil
+            xx = new int[x / 25];//coord net
+            yy = new int[y / 25];
+            d = new Draw(x, y);
+            b = new List<Body>();
+            f = new List<Food>();
+            b.Add(new Body(100, 300, c.step, c.step));
+            for (int i = 0; i < x / 25; i++)
+            {
+                k += c.step;
+                xx[i] = k;
+            }
+            k = 0;
+            for (int i = 0; i < y / 25; i++)
+            {
+                k += c.step;
+                yy[i] = k;
+            }
+            f.Add(new Food(xx[rand.Next(0, x / 25 - 1)], yy[rand.Next(0, y / 25 - 1)], c.step, c.step));
+            for (int i = 3; i > 0; i--)
+            {
+                g.Clear(Color.AntiqueWhite);
+                g.DrawString(i.ToString(), ff, Brushes.Black, x / 2 - c.step, y / 2 - c.step);
+                System.Threading.Thread.Sleep(1000);
+            }
+            timer1.Enabled = true;
         }
 
 

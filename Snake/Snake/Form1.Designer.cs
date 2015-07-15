@@ -33,16 +33,17 @@
             this.menuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newGameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.difficultyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.highToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mediumToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.lowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -69,20 +70,16 @@
             // newGameToolStripMenuItem
             // 
             this.newGameToolStripMenuItem.Name = "newGameToolStripMenuItem";
-            this.newGameToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.newGameToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
             this.newGameToolStripMenuItem.Text = "New game";
             this.newGameToolStripMenuItem.Click += new System.EventHandler(this.newGameToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
-            // 
-            // timer1
-            // 
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // settingsToolStripMenuItem
             // 
@@ -99,29 +96,33 @@
             this.mediumToolStripMenuItem,
             this.lowToolStripMenuItem});
             this.difficultyToolStripMenuItem.Name = "difficultyToolStripMenuItem";
-            this.difficultyToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.difficultyToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
             this.difficultyToolStripMenuItem.Text = "Difficulty";
             // 
             // highToolStripMenuItem
             // 
             this.highToolStripMenuItem.Name = "highToolStripMenuItem";
-            this.highToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.highToolStripMenuItem.Size = new System.Drawing.Size(119, 22);
             this.highToolStripMenuItem.Text = "High";
             this.highToolStripMenuItem.Click += new System.EventHandler(this.highToolStripMenuItem_Click);
             // 
             // mediumToolStripMenuItem
             // 
             this.mediumToolStripMenuItem.Name = "mediumToolStripMenuItem";
-            this.mediumToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.mediumToolStripMenuItem.Size = new System.Drawing.Size(119, 22);
             this.mediumToolStripMenuItem.Text = "Medium";
             this.mediumToolStripMenuItem.Click += new System.EventHandler(this.mediumToolStripMenuItem_Click);
             // 
             // lowToolStripMenuItem
             // 
             this.lowToolStripMenuItem.Name = "lowToolStripMenuItem";
-            this.lowToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.lowToolStripMenuItem.Size = new System.Drawing.Size(119, 22);
             this.lowToolStripMenuItem.Text = "Low";
             this.lowToolStripMenuItem.Click += new System.EventHandler(this.lowToolStripMenuItem_Click);
+            // 
+            // timer1
+            // 
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // label1
             // 
@@ -159,11 +160,26 @@
             this.label4.TabIndex = 4;
             this.label4.Text = "0";
             // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.SystemColors.GrayText;
+            this.button1.Enabled = false;
+            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.button1.Location = new System.Drawing.Point(385, 434);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(177, 54);
+            this.button1.TabIndex = 5;
+            this.button1.Text = "Try again";
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Visible = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(984, 711);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -173,6 +189,7 @@
             this.Name = "Form1";
             this.Text = "Snake";
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.ClientSizeChanged += new System.EventHandler(this.Form1_ClientSizeChanged);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
@@ -197,6 +214,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Button button1;
     }
 }
 
