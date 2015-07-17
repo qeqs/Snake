@@ -54,7 +54,7 @@
             this.settingsToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(984, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1184, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -127,6 +127,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.SystemColors.Control;
             this.label1.Location = new System.Drawing.Point(300, 6);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(50, 13);
@@ -136,6 +137,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
+            this.label2.BackColor = System.Drawing.SystemColors.Control;
             this.label2.Location = new System.Drawing.Point(350, 6);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(44, 13);
@@ -145,6 +147,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
+            this.label3.BackColor = System.Drawing.SystemColors.Control;
             this.label3.Location = new System.Drawing.Point(428, 6);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(38, 13);
@@ -154,6 +157,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
+            this.label4.BackColor = System.Drawing.SystemColors.Control;
             this.label4.Location = new System.Drawing.Point(472, 6);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(13, 13);
@@ -163,22 +167,25 @@
             // button1
             // 
             this.button1.BackColor = System.Drawing.SystemColors.GrayText;
-            this.button1.Enabled = false;
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button1.Location = new System.Drawing.Point(385, 434);
+            this.button1.Location = new System.Drawing.Point(0, 27);
             this.button1.Name = "button1";
+            this.button1.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.button1.Size = new System.Drawing.Size(177, 54);
             this.button1.TabIndex = 5;
             this.button1.Text = "Try again";
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Visible = false;
+            this.button1.LocationChanged += new System.EventHandler(this.button1_LocationChanged);
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(984, 711);
+            this.AutoSize = true;
+            this.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.ClientSize = new System.Drawing.Size(1184, 711);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
@@ -186,6 +193,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
+            this.MinimumSize = new System.Drawing.Size(1000, 500);
             this.Name = "Form1";
             this.Text = "Snake";
             this.Load += new System.EventHandler(this.Form1_Load);

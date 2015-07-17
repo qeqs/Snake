@@ -34,11 +34,13 @@ namespace Snake
             g.Clear(Color.AntiqueWhite);
             g.DrawString(c.score.ToString(), ff, Brushes.Black, x / 2-c.step, y / 2-c.step);
             c.score = 0;
+            game = false;
             button1.Enabled = true;
             button1.Visible = true;
             
         }
         bool pause = false;
+        bool game = false;
         void Pause()
         {
             if (!pause)
@@ -54,16 +56,18 @@ namespace Snake
             }
 
         }
-        private void newGameToolStripMenuItem_Click(object sender, EventArgs e)
+        void New(bool tick)
         {
-            button1.Enabled = false;
+            g = CreateGraphics();
+             button1.Enabled = false;
             button1.Visible = false;
+            game = true;
             ff = new Font("Arial", 40, FontStyle.Bold);//end game string
             w = 1;//turn var
             int k = 0;//kostil
             xx = new int[x / 25];//coord net
             yy = new int[y / 25];
-            d = new Draw(x, y);
+            d = new Draw(x,y);
             b = new List<Body>();
             f = new List<Food>();
             b.Add(new Body(100, 300, c.step, c.step));
@@ -79,6 +83,7 @@ namespace Snake
                 yy[i] = k;
             }
             f.Add(new Food(xx[rand.Next(0, x / 25 - 1)], yy[rand.Next(0, y / 25 - 1)], c.step, c.step));
+            if(tick)
             for (int i = 3; i > 0; i--)
             {
                 g.Clear(Color.AntiqueWhite);
@@ -87,12 +92,18 @@ namespace Snake
             }
                 timer1.Enabled = true;
         }
+        
+        private void newGameToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            New(true);
+        }
 
         private void Form1_Load(object sender, EventArgs e)
         {
             x = ClientSize.Width;
             y = ClientSize.Height;
-            g = CreateGraphics();
+            
+            
         }
         int s = 1;//counter for turn method
         void Chain(int x,int y)//snake move
@@ -162,12 +173,12 @@ namespace Snake
                 }
             }
             label4.Text = c.score.ToString();
-
-            g.DrawImage(d.Frame(b, f), ClientRectangle);
+         //   g.DrawImage(d.Frame(b, f), ClientRectangle);
+            g.DrawImage(d.Frame(b, f),0,0,x,y);
 
             //-------------------------condition of end-----------------------
 
-            if (b[0].tail.X < 0 || b[0].tail.Y < 0 || b[0].tail.X + c.step > x || b[0].tail.Y + c.step > y)//if out of clientrect
+            if (b[0].tail.X < 0 || b[0].tail.Y < 24 || b[0].tail.X + c.step > x || b[0].tail.Y + c.step > y)//if out of clientrect
                 Exit();
             for (int i = 1; i < b.Count; i++)
             {
@@ -179,6 +190,7 @@ namespace Snake
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
+            if(game)
             switch (e.KeyValue)//38 - up, 40 - down, 37 - left, 39 - right
             {
                 case 38:
@@ -229,60 +241,27 @@ namespace Snake
             label2.Text = "Low";
         }
         //-------------------------------------------------
-        private void Form1_ClientSizeChanged(object sender, EventArgs e)
+        private void Form1_ClientSizeChanged(object sender, EventArgs e)//доработать-------------------------------------------------
         {
-            Pause();
+            
             x = ClientSize.Width;
             y = ClientSize.Height;
-            int k = 0;//kostil
-            xx = new int[x / 25];//coord net
-            yy = new int[y / 25];
-            d = new Draw(x, y);
-            for (int i = 0; i < x / 25; i++)
-            {
-                k += c.step;
-                xx[i] = k;
-            }
-            k = 0;
-            for (int i = 0; i < y / 25; i++)
-            {
-                k += c.step;
-                yy[i] = k;
+            
+            if (game)
+            {             
+                New(false);
+                Pause();
             }
         }
 
         private void button1_Click(object sender, EventArgs e)//new game button
         {
-            button1.Enabled = false;
-            button1.Visible = false;
-            ff = new Font("Arial", 40, FontStyle.Bold);//end game string
-            w = 1;//turn var
-            int k = 0;//kostil
-            xx = new int[x / 25];//coord net
-            yy = new int[y / 25];
-            d = new Draw(x, y);
-            b = new List<Body>();
-            f = new List<Food>();
-            b.Add(new Body(100, 300, c.step, c.step));
-            for (int i = 0; i < x / 25; i++)
-            {
-                k += c.step;
-                xx[i] = k;
-            }
-            k = 0;
-            for (int i = 0; i < y / 25; i++)
-            {
-                k += c.step;
-                yy[i] = k;
-            }
-            f.Add(new Food(xx[rand.Next(0, x / 25 - 1)], yy[rand.Next(0, y / 25 - 1)], c.step, c.step));
-            for (int i = 3; i > 0; i--)
-            {
-                g.Clear(Color.AntiqueWhite);
-                g.DrawString(i.ToString(), ff, Brushes.Black, x / 2 - c.step, y / 2 - c.step);
-                System.Threading.Thread.Sleep(1000);
-            }
-            timer1.Enabled = true;
+            New(true);
+        }
+
+        private void button1_LocationChanged(object sender, EventArgs e)
+        {
+
         }
 
 
