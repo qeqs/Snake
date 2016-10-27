@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -20,19 +20,19 @@ namespace Snake
         int w;//keys
         Graphics g;
         Constants c;
-        Draw d;
+        Draw draw;
         int x, y;
-        List<Body> b;
-        List<Food> f;
+        List<Body> body;
+        List<Food> food;
         Random rand = new Random();
         int[] xx;
         int[] yy;
-        Font ff;
+        Font font;
         void Exit()//end game
         {
             timer1.Enabled = false;
             g.Clear(Color.AntiqueWhite);
-            g.DrawString(c.score.ToString(), ff, Brushes.Black, x / 2-c.step, y / 2-c.step);
+            g.DrawString(c.score.ToString(), font, Brushes.Black, x / 2-c.step, y / 2-c.step);
             c.score = 0;
             game = false;
             button1.Enabled = true;
@@ -47,7 +47,7 @@ namespace Snake
             {
                 timer1.Enabled = false;
                 pause = true;
-                g.DrawString("Pause", ff, Brushes.Black, x / 2 - c.step, y / 2 - c.step);
+                g.DrawString("Pause", font, Brushes.Black, x / 2 - c.step, y / 2 - c.step);
             }
             else
             {
@@ -62,15 +62,15 @@ namespace Snake
              button1.Enabled = false;
             button1.Visible = false;
             game = true;
-            ff = new Font("Arial", 40, FontStyle.Bold);//end game string
+            font = new Font("Arial", 40, FontStyle.Bold);//end game string
             w = 1;//turn var
             int k = 0;//kostil
             xx = new int[x / 25];//coord net
             yy = new int[y / 25];
-            d = new Draw(x,y);
-            b = new List<Body>();
-            f = new List<Food>();
-            b.Add(new Body(100, 300, c.step, c.step));
+            draw = new Draw(x,y);
+            body = new List<Body>();
+            food = new List<Food>();
+            body.Add(new Body(100, 300, c.step, c.step));
             for (int i = 0; i < x / 25; i++)
             {
                 k += c.step;
@@ -82,12 +82,12 @@ namespace Snake
                 k += c.step;
                 yy[i] = k;
             }
-            f.Add(new Food(xx[rand.Next(0, x / 25 - 1)], yy[rand.Next(0, y / 25 - 1)], c.step, c.step));
+            food.Add(new Food(xx[rand.Next(0, x / 25 - 1)], yy[rand.Next(0, y / 25 - 1)], c.step, c.step));
             if(tick)
             for (int i = 3; i > 0; i--)
             {
                 g.Clear(Color.AntiqueWhite);
-                g.DrawString(i.ToString(), ff, Brushes.Black, x / 2 - c.step, y / 2 - c.step);
+                g.DrawString(i.ToString(), font, Brushes.Black, x / 2 - c.step, y / 2 - c.step);
                 System.Threading.Thread.Sleep(1000);
             }
                 timer1.Enabled = true;
@@ -109,12 +109,12 @@ namespace Snake
         void Chain(int x,int y)//snake move
         {
           
-            if (s != b.Count)
+            if (s != body.Count)
             {
-                int tx = b[s].tail.X;
-                int ty = b[s].tail.Y;
-                b[s].tail.Y = y;
-                b[s].tail.X = x;
+                int tx = body[s].tail.X;
+                int ty = body[s].tail.Y;
+                body[s].tail.Y = y;
+                body[s].tail.X = x;
                 ++s;
                 Chain(tx, ty);//recursion
             }
@@ -124,65 +124,65 @@ namespace Snake
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            Chain(b[0].tail.X, b[0].tail.Y);//turning method
+            Chain(body[0].tail.X, body[0].tail.Y);//turning method
             s = 1;//turn counter
             switch (w)//1-up,2-down,3-left,4-right
             {
                 case 1:
-                    b[0].tail.Y -= c.step;
+                    body[0].tail.Y -= c.step;
                     break;
                 case 2:
-                    b[0].tail.Y += c.step;
+                    body[0].tail.Y += c.step;
                     break;
                 case 3:
-                    b[0].tail.X -= c.step;
+                    body[0].tail.X -= c.step;
                     break;
                 case 4:
-                    b[0].tail.X += c.step;
+                    body[0].tail.X += c.step;
                     break;
             }
            
-            for (int i = 0; i < f.Count; i++)
+            for (int i = 0; i < food.Count; i++)
             {
-                if (b[0].tail.IntersectsWith(f[i].block))//if head eats food
+                if (body[0].tail.IntersectsWith(food[i].block))//if head eats food
                 {
                     c.score+=c.score_step;
                     switch(w)//after eating add body for right coordinates
                     {
                         case 1:                    
-                    b.Add(new Body(b[b.Count - 1].tail.X, b[b.Count - 1].tail.Y+c.step, c.step, c.step));
+                    body.Add(new Body(body[body.Count - 1].tail.X, body[body.Count - 1].tail.Y+c.step, c.step, c.step));
                     break;
                         case 2:
-                    b.Add(new Body(b[b.Count - 1].tail.X, b[b.Count - 1].tail.Y - c.step, c.step, c.step));
+                    body.Add(new Body(body[body.Count - 1].tail.X, body[body.Count - 1].tail.Y - c.step, c.step, c.step));
                     break;
                         case 3:
-                    b.Add(new Body(b[b.Count - 1].tail.X+c.step, b[b.Count - 1].tail.Y, c.step, c.step));
+                    body.Add(new Body(body[body.Count - 1].tail.X+c.step, body[body.Count - 1].tail.Y, c.step, c.step));
                     break;
                         case 4:
-                    b.Add(new Body(b[b.Count - 1].tail.X-c.step, b[b.Count - 1].tail.Y, c.step, c.step));
+                    body.Add(new Body(body[body.Count - 1].tail.X-c.step, body[body.Count - 1].tail.Y, c.step, c.step));
                     break;
                     }
-                    b[b.Count - 1].created = true;//useless
-                    f.Add(new Food(xx[rand.Next(0, x / 25 - 1)], yy[rand.Next(0, y / 25 - 1)], c.step, c.step));
-                    f[i].eaten = true;//have been eaten
+                    body[body.Count - 1].created = true;//useless
+                    food.Add(new Food(xx[rand.Next(0, x / 25 - 1)], yy[rand.Next(0, y / 25 - 1)], c.step, c.step));
+                    food[i].eaten = true;//have been eaten
                 }
                 
-                if(f[i].eaten&&b[b.Count-1].tail.IntersectsWith(f[i].block))
+                if(food[i].eaten&&body[body.Count-1].tail.IntersectsWith(food[i].block))
                 {
-                    f.RemoveAt(i);
+                    food.RemoveAt(i);
                 }
             }
             label4.Text = c.score.ToString();
          //   g.DrawImage(d.Frame(b, f), ClientRectangle);
-            g.DrawImage(d.Frame(b, f),0,0,x,y);
+            g.DrawImage(draw.Frame(body, food),0,0,x,y);
 
             //-------------------------condition of end-----------------------
 
-            if (b[0].tail.X < 0 || b[0].tail.Y < 24 || b[0].tail.X + c.step > x || b[0].tail.Y + c.step > y)//if out of clientrect
+            if (body[0].tail.X < 0 || body[0].tail.Y < 24 || body[0].tail.X + c.step > x || body[0].tail.Y + c.step > y)//if out of clientrect
                 Exit();
-            for (int i = 1; i < b.Count; i++)
+            for (int i = 1; i < body.Count; i++)
             {
-                if (b[0].tail.IntersectsWith(b[i].tail))//if eat itself
+                if (body[0].tail.IntersectsWith(body[i].tail))//if eat itself
                     Exit();
 
             }
